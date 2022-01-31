@@ -1,0 +1,64 @@
+.container {
+  background-color: rgba(128, 128, 128, 15%);
+  margin: 0 auto;
+  margin-top: 20px;
+  border-radius: 10px;
+  padding: 10px;
+  display: block;
+  font-family: "Spline Sans", sans-serif;
+  max-width: 650px;
+}
+
+h1,
+.today-date,
+.actual-temperature,
+.max-min,
+.col,
+.temp-variable,
+.degrees-type {
+  text-align: center;
+}
+
+h1 {
+  font-size: 70px;
+  font-weight: bold;
+}
+
+.today-date {
+  font-size: 20px;
+}
+
+.degrees-type {
+  font-size: 25px;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+.actual-temperature {
+  font-size: 120px;
+  margin-bottom: -35px;
+  font-weight: bold;
+}
+
+.rain {
+  width: 210px;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 5px;
+}
+.card {
+  margin: 8px;
+  padding: 8px;
+}
+
+.max-min {
+  font-size: small;
+  margin-bottom: 5px;
+}
+
+.days-future,
+.temp-variable {
+  color: rgb(26, 100, 214);
+  font-weight: bold;
+}
