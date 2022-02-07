@@ -1,5 +1,7 @@
 
-
+body {
+  background-color: rgba(26, 100, 214,25%);
+}
 .weather-app-wrapper {
 max-width: 650px;
 margin: 0 auto;
@@ -8,14 +10,6 @@ margin-top: 20px;
 text-align: center;
 padding: 0;
 }
-
-.weather-app {
-  background-color: rgba(128, 128, 128, 15%);
-  border-radius: 10px;
-  padding: 10px;
-  font-family: "Spline Sans", sans-serif;
-}
-
 
 h1,
 .today-date,
@@ -43,6 +37,14 @@ a {
   text-decoration: none;
   color: black;
 }
+
+.weather-app {
+  background-color: rgb(226, 224, 224);
+  border-radius: 10px;
+  padding: 10px;
+  font-family: "Spline Sans", sans-serif;
+}
+
 .actual-temperature {
   font-size: 120px;
   margin-bottom: -35px;
@@ -69,4 +71,9 @@ a {
 .temp-variable {
   color: rgb(26, 100, 214);
   font-weight: bold;
+}
+
+.weather-description{
+  text-transform: capitalize;
+  font-size: 22px;
 }

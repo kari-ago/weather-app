@@ -1,7 +1,7 @@
 //Feature 1: Display current date
 let appDate = document.querySelector(".today-date");
 
-let now = new Date();
+let formatDate = new Date();
 let days = [
   "Sunday",
   "Monday",
@@ -11,7 +11,7 @@ let days = [
   "Friday",
   "Saturday"
 ];
-let day = days[now.getDay()];
+let day = days[formatDate.getDay()];
 let months = [
   "Jan",
   "Feb",
@@ -26,14 +26,14 @@ let months = [
   "Nov",
   "Dec"
 ];
-let month = months[now.getMonth()];
-let year = now.getFullYear();
-let date = now.getDate();
-let hours = now.getHours();
+let month = months[formatDate.getMonth()];
+let year = formatDate.getFullYear();
+let date = formatDate.getDate();
+let hours = formatDate.getHours();
 if (hours < 10 ) {
   hours = `0${hours}`;
 }
-let minutes = now.getMinutes();
+let minutes = formatDate.getMinutes();
 if (minutes < 10 ) {
   minutes = `0${minutes}`;
 }
@@ -51,6 +51,7 @@ function showWeather(response) {
   document.querySelector("#actual-temp").innerHTML = Math.round(
     response.data.main.temp
   );
+  document.querySelector("#wdescription").innerHTML = response.data.weather[0].description;
   document.querySelector("#max-temperature").innerHTML = Math.round(
     response.data.main.temp_max
   );
@@ -61,12 +62,14 @@ function showWeather(response) {
   document.querySelector("#wind-speed").innerHTML = Math.round(
     response.data.wind.speed
   );
-  document.querySelector("#sunrise").innerHTML = Math.round(
-    response.data.sys.sunrise
-  );
+  document.querySelector("#feeling").innerHTML = Math.round(response.data.main.feels_like);
+  document.querySelector("#sunrise").innerHTML = (response.data.sys.sunrise);
   document.querySelector("#sunset").innerHTML = Math.round(
     response.data.sys.sunset
   );
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+  iconElement.setAttribute("alt",response.data.weather[0].description);
 }
 
 function showCity(event) {
@@ -81,6 +84,7 @@ function showCity(event) {
   axios.get(apiUrl).then(showWeather);
   //then create the function showWeather above
 }
+// get the Air pollution levels
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", showCity);
