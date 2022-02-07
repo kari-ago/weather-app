@@ -30,7 +30,13 @@ let month = months[now.getMonth()];
 let year = now.getFullYear();
 let date = now.getDate();
 let hours = now.getHours();
+if (hours < 10 ) {
+  hours = `0${hours}`;
+}
 let minutes = now.getMinutes();
+if (minutes < 10 ) {
+  minutes = `0${minutes}`;
+}
 
 appDate.innerHTML = `Today is ${day} ${month} ${date}, ${year} | ${hours}:${minutes}`;
 
