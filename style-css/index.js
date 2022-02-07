@@ -88,3 +88,13 @@ function showCity(event) {
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", showCity);
+
+function showFarenheitTemp(event) {
+  event.preventDefault();
+  let farenheitTemp = document.querySelector("#actual-temp");
+}
+
+let farenheitLink = document.querySelector("#farenheit-temp");
+farenheitLink.addEventListener("click",showFarenheitTemp);
+
+//I havent finished but ran out of time :(
