@@ -40,9 +40,21 @@ if (minutes < 10 ) {
 
 appDate.innerHTML = `Today is ${day} ${month} ${date}, ${year} | ${hours}:${minutes}`;
 
-//Feature 2: Add a search engine, when searching for a city (i.e. Paris), display the city name on the page after the user submits the form.
-// id="search-city-input" "search-form":form id
-//ask how to .toUpperCase()
+// Formate the time for sunrise and sunset
+function formatHoursSun(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+   if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+   if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  return `${hours}:${minutes}`
+}
+
+//Feature show the weather data
 
 function showWeather(response) {
   console.log(response.data);
@@ -63,9 +75,9 @@ function showWeather(response) {
     response.data.wind.speed
   );
   document.querySelector("#feeling").innerHTML = Math.round(response.data.main.feels_like);
-  document.querySelector("#sunrise").innerHTML = (response.data.sys.sunrise);
-  document.querySelector("#sunset").innerHTML = Math.round(
-    response.data.sys.sunset
+  document.querySelector("#sunrise").innerHTML = formatHoursSun(response.data.sys.sunrise * 1000);
+  document.querySelector("#sunset").innerHTML = formatHoursSun(
+    response.data.sys.sunset *1000
   );
   let iconElement = document.querySelector("#icon");
   iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
@@ -82,9 +94,7 @@ function showCity(event) {
   console.log(apiUrl);
   console.log(axios);
   axios.get(apiUrl).then(showWeather);
-  //then create the function showWeather above
 }
-// get the Air pollution levels
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", showCity);
@@ -96,5 +106,3 @@ function showFarenheitTemp(event) {
 
 let farenheitLink = document.querySelector("#farenheit-temp");
 farenheitLink.addEventListener("click",showFarenheitTemp);
-
-//I havent finished but ran out of time :(
