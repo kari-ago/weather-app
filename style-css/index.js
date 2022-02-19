@@ -38,7 +38,7 @@ if (minutes < 10 ) {
   minutes = `0${minutes}`;
 }
 
-appDate.innerHTML = `Today is ${day} ${month} ${date}, ${year} | ${hours}:${minutes}`;
+appDate.innerHTML = `Last updated: ${day} ${month} ${date}, ${year} | ${hours}:${minutes}`;
 
 // Formate the time for sunrise and sunset
 function formatHoursSun(timestamp) {
@@ -84,20 +84,26 @@ function showWeather(response) {
   iconElement.setAttribute("alt",response.data.weather[0].description);
 }
 
-function showCity(event) {
-  event.preventDefault();
+function search(city) {
   //make an API call to open weather API
   //display the city and temp
-  let apiKey = "86e2f0ff3a54fd7933e9adb20d0d5090";
-  let city = document.querySelector("#search-city-input").value;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+ let apiKey = "86e2f0ff3a54fd7933e9adb20d0d5090";
+ let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   console.log(apiUrl);
   console.log(axios);
   axios.get(apiUrl).then(showWeather);
 }
 
+function handleSubmit(event) {
+  event.preventDefault();
+  let city = document.querySelector("#search-city-input").value;
+  search(city);  
+ }
+
 let form = document.querySelector("#search-form");
-form.addEventListener("submit", showCity);
+form.addEventListener("submit", handleSubmit);
+
+search("Paris");
 
 function showFarenheitTemp(event) {
   event.preventDefault();
