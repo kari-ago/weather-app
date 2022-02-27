@@ -54,6 +54,33 @@ function formatHoursSun(timestamp) {
   return `${hours}:${minutes}`
 }
 
+// repeat the weather 5-day forecast
+function displayForecast() {
+  let forecastElement = document.querySelector("#weather-forecast");
+
+
+let forecastHTML = `<div class="row">`;
+let days = ["Thu","Fri","Sat"];
+days.forEach(function(day){
+forecastHTML = forecastHTML + `
+        <div class="col-2">
+          <div class="days-future">
+            ${day}
+          </div>
+          <img src="https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png" alt="forecast-icon" width="45">
+          <div class="forecast-temp-max">
+            12°
+            </div>
+            <div class="forecast-temp-min">
+            10°
+            </div>
+            </div>`  
+})
+        forecastHTML = forecastHTML + `</div>`;
+        forecastElement.innerHTML = forecastHTML;
+}
+
+
 //Feature show the weather data
 
 function showWeather(response) {
@@ -104,6 +131,7 @@ let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
 search("Paris");
+displayForecast();
 
 function showFarenheitTemp(event) {
   event.preventDefault();
