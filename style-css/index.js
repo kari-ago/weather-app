@@ -53,28 +53,38 @@ function formatHoursSun(timestamp) {
   }
   return `${hours}:${minutes}`
 }
+//format days for forecast
+ function formatDay(timestamp) {
+   let date = new Date(timestamp * 1000);
+   let day = date.getDay();
+   let days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+   return days[day];
+  }
+
 
 // repeat the weather 5-day forecast
 function displayForecast(response) {
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#weather-forecast");
 
-let days = ["Mon","Tue","Wed","Thu", "Fri","Sat"];
+
 let forecastHTML = `<div class="row">`;
-days.forEach(function(day){
+forecast.forEach(function (forecastDay, index){
+  if (index < 6) {
 forecastHTML = forecastHTML + `
         <div class="col-2">
           <div class="days-future">
-            ${day}
+            ${formatDay(forecastDay.dt)}
           </div>
-          <img src="https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png" alt="forecast-icon" width="45">
+          <img src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="forecast-icon" width="45">
           <div class="forecast-temp-max">
-            12°
+            ${Math.round(forecastDay.temp.max)}°
             </div>
             <div class="forecast-temp-min">
-            10°
+            ${Math.round(forecastDay.temp.min)}° 
             </div>
-            </div>`  
-})
+            </div>` ; 
+}})
         forecastHTML = forecastHTML + `</div>`;
         forecastElement.innerHTML = forecastHTML;
 }
