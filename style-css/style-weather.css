@@ -77,3 +77,7 @@ a {
   text-transform: capitalize;
   font-size: 22px;
 }
+
+.forecast-temp-max{
+  font-weight: bold ;
+}
