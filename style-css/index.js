@@ -89,11 +89,22 @@ forecastHTML = forecastHTML + `
         forecastElement.innerHTML = forecastHTML;
 }
 
-//api with the lat and lon info from getForecast within the function showWeather
+function displayAirQuality(response) {
+  document.querySelector("#air-quality").innerHTML = response.data.list.main.aqi;
+}
+
+//api with the lat and lon info from getForecast within the function showWeather step 2
 function getForecast(coordinates) {
   let apiKey = "86e2f0ff3a54fd7933e9adb20d0d5090";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
+}
+
+// get coordinates for Air information
+function getAirInfo(coordinates) {
+  let apiKey = "86e2f0ff3a54fd7933e9adb20d0d5090";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayAirQuality);
 }
 
 //Feature show the weather data
@@ -123,9 +134,10 @@ function showWeather(response) {
   iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
   iconElement.setAttribute("alt",response.data.weather[0].description);
 
-// Addition of another API that obtains the forecast with lat and lon
+// Addition of another API that obtains the forecast with lat and lon step 1 -- it is within showWeather
 
 getForecast(response.data.coord);
+getAirInfo(response.data.coord);
 
 }
 
