@@ -38,7 +38,7 @@ if (minutes < 10 ) {
   minutes = `0${minutes}`;
 }
 
-appDate.innerHTML = `Last updated: ${day} ${month} ${date}, ${year} | ${hours}:${minutes}`;
+appDate.innerHTML = `Last updated: ${day} ${month} ${date}, ${year} | ${hours}:${minutes} | In Celcius`;
 
 // Formate the time for sunrise and sunset
 function formatHoursSun(timestamp) {
@@ -91,7 +91,6 @@ forecastHTML = forecastHTML + `
 
 //api with the lat and lon info from getForecast within the function showWeather
 function getForecast(coordinates) {
-  console.log(coordinates);
   let apiKey = "86e2f0ff3a54fd7933e9adb20d0d5090";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
@@ -100,19 +99,17 @@ function getForecast(coordinates) {
 //Feature show the weather data
 
 function showWeather(response) {
-  console.log(response.data);
-  console.log(response.data.name);
   document.querySelector("H1").innerHTML = response.data.name;
-  document.querySelector("#actual-temp").innerHTML = Math.round(
+  document.querySelector("#actual-temp").innerHTML =`${Math.round(
     response.data.main.temp
-  );
+  )}°` ;
   document.querySelector("#wdescription").innerHTML = response.data.weather[0].description;
-  document.querySelector("#max-temperature").innerHTML = Math.round(
+  document.querySelector("#max-temperature").innerHTML = `${Math.round(
     response.data.main.temp_max
-  );
-  document.querySelector("#min-temperature").innerHTML = Math.round(
+  )}°`;
+  document.querySelector("#min-temperature").innerHTML = `${Math.round(
     response.data.main.temp_min
-  );
+  )}°`;
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector("#wind-speed").innerHTML = Math.round(
     response.data.wind.speed
@@ -137,8 +134,6 @@ function search(city) {
   //display the city and temp
  let apiKey = "86e2f0ff3a54fd7933e9adb20d0d5090";
  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-  console.log(apiUrl);
-  console.log(axios);
   axios.get(apiUrl).then(showWeather);
 }
 
@@ -153,11 +148,3 @@ form.addEventListener("submit", handleSubmit);
 
 search("Paris");
 displayForecast();
-
-function showFarenheitTemp(event) {
-  event.preventDefault();
-  let farenheitTemp = document.querySelector("#actual-temp");
-}
-
-let farenheitLink = document.querySelector("#farenheit-temp");
-farenheitLink.addEventListener("click",showFarenheitTemp);
