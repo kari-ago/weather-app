@@ -90,7 +90,7 @@ forecastHTML = forecastHTML + `
 }
 
 function displayAirQuality(response) {
-  document.querySelector("#air-quality").innerHTML = response.data.list.main.aqi;
+  document.querySelector("#air-quality").innerHTML = response.data.list[0].main.aqi;
 }
 
 //api with the lat and lon info from getForecast within the function showWeather step 2
@@ -159,4 +159,3 @@ let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
 search("Paris");
-displayForecast();
