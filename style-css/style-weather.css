@@ -3,7 +3,7 @@ body {
   background-color: rgba(26, 100, 214,25%);
 }
 .weather-app-wrapper {
-max-width: 650px;
+max-width: 600px;
 margin: 0 auto;
 display: block;
 margin-top: 20px;
@@ -49,8 +49,8 @@ a:hover {
 }
 
 .actual-temperature {
-  font-size: 120px;
-  margin-bottom: -35px;
+  font-size: 110px;
+  margin-bottom: -10px;
   font-weight: bold;
 }
 

@@ -90,7 +90,22 @@ forecastHTML = forecastHTML + `
 }
 
 function displayAirQuality(response) {
-  document.querySelector("#air-quality").innerHTML = response.data.list[0].main.aqi;
+  //document.querySelector("#air-quality").innerHTML = response.data.list[0].main.aqi;
+
+let airApiData = response.data.list[0].main.aqi;
+if (airApiData === 1) {
+  airApiData = `1 - Good `;
+} else if (airApiData === 2) {
+  airApiData = `2 - Fair `;
+} else if (airApiData === 3) {
+  airApiData = `3 - Moderate `;
+} else if (airApiData === 4) {
+  airApiData = `4 - Poor `;
+} else if (airApiData === 5) {
+  airApiData = `5 - Very Poor `;
+}
+document.querySelector("#air-quality").innerHTML = airApiData;
+
 }
 
 //api with the lat and lon info from getForecast within the function showWeather step 2
