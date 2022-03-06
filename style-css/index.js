@@ -40,6 +40,9 @@ if (minutes < 10 ) {
 
 appDate.innerHTML = `Last updated: ${day} ${month} ${date}, ${year} | ${hours}:${minutes} | In Celcius`;
 
+// Icon Id array for images
+
+
 // Formate the time for sunrise and sunset
 function formatHoursSun(timestamp) {
   let date = new Date(timestamp);
@@ -64,6 +67,7 @@ function formatHoursSun(timestamp) {
 
 // repeat the weather 5-day forecast
 function displayForecast(response) {
+  console.log(response.data.daily);
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#weather-forecast");
 
@@ -76,7 +80,7 @@ forecastHTML = forecastHTML + `
           <div class="days-future">
             ${formatDay(forecastDay.dt)}
           </div>
-          <img src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="forecast-icon" width="45">
+          <img src="style-css/${forecastDay.weather[0].icon}.gif" alt="forecast-icon" width="45">
           <div class="forecast-temp-max">
             ${Math.round(forecastDay.temp.max)}°
             </div>
@@ -145,10 +149,16 @@ function showWeather(response) {
   document.querySelector("#sunset").innerHTML = formatHoursSun(
     response.data.sys.sunset *1000
   );
-  let iconElement = document.querySelector("#icon");
-  iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
-  iconElement.setAttribute("alt",response.data.weather[0].description);
+  //let iconElement = document.querySelector("#icon");
+  //iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+  //console.log(response.data);
+  //alternative text for the icon
+ // iconElement.setAttribute("alt",response.data.weather[0].description);
 
+ let iconElement = document.querySelector("#icon");
+ let iconApi = response.data.weather[0].icon;
+ iconElement.setAttribute("src",`style-css/${iconApi}.gif`);
+ 
 // Addition of another API that obtains the forecast with lat and lon step 1 -- it is within showWeather
 
 getForecast(response.data.coord);
